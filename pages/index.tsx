@@ -10,6 +10,7 @@ import { testResults } from '../utils/testResults';
 import { testAnswer } from '../utils/testAnswer';
 import Divider from '../components/Divider';
 import { MdOutlineManageSearch } from 'react-icons/md';
+import Layout from '../components/Layout';
 
 export default function Home(): JSX.Element {
   const searchActions = useSearchActions();
@@ -48,36 +49,38 @@ export default function Home(): JSX.Element {
         setSelectedCitation,
       }}
     >
-      <div className="flex justify-center px-4 py-6">
-        <div className="w-full max-w-3xl flex flex-col">
-          <SearchBar
-            onSearch={handleSearch}
-            placeholder="Test your knowledge of the wizarding world..."
-          />
-          <SpellCheck />
-          {generatingAnswer && (
-            <div className="flex items-center gap-2">
-              <Loading />
-              <p>Generating answer...</p>
-            </div>
-          )}
-          {!generatingAnswer && answer && (
-            <GenerativeAnswerWrapper answer={answer} />
-          )}
-          {currentQuery && answer && !generatingAnswer && <Divider />}
-          <section className="flex flex-col">
-            {currentQuery && (
-              <div className="mt-8 mb-0 py-0 flex gap-2 items-center">
-                <MdOutlineManageSearch className="w-5 h-5" />
-                <h3 className="text-lg">Raw Results</h3>
+      <Layout>
+        <div className="flex justify-center px-4 py-6">
+          <div className="w-full max-w-3xl flex flex-col">
+            <SearchBar
+              onSearch={handleSearch}
+              placeholder="Test your knowledge of the wizarding world..."
+            />
+            <SpellCheck />
+            {generatingAnswer && (
+              <div className="flex items-center gap-2">
+                <Loading />
+                <p>Generating answer...</p>
               </div>
             )}
-            {verticalResults && verticalResults.length > 0 && (
-              <SearchResults results={verticalResults} />
+            {!generatingAnswer && answer && (
+              <GenerativeAnswerWrapper answer={answer} />
             )}
-          </section>
+            {currentQuery && answer && !generatingAnswer && <Divider />}
+            <section className="flex flex-col">
+              {currentQuery && (
+                <div className="mt-8 mb-0 py-0 flex gap-2 items-center">
+                  <MdOutlineManageSearch className="w-5 h-5" />
+                  <h3 className="text-lg">Raw Results</h3>
+                </div>
+              )}
+              {verticalResults && verticalResults.length > 0 && (
+                <SearchResults results={verticalResults} />
+              )}
+            </section>
+          </div>
         </div>
-      </div>
+      </Layout>
     </PageContextProvider>
   );
 }

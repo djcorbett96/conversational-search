@@ -13,7 +13,7 @@ const SearchResult = ({ result }) => {
       <p
         className={cn(
           'px-2 rounded-md border h-fit mr-2',
-          selectedCitation === `${result.index}` && 'bg-blue-700 text-white'
+          selectedCitation === `${result.index}` && 'bg-gray-900 text-white'
         )}
       >
         {result.index}
