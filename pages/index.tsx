@@ -11,6 +11,8 @@ import { testAnswer } from '../utils/testAnswer';
 import Divider from '../components/Divider';
 import { MdOutlineManageSearch } from 'react-icons/md';
 import Layout from '../components/Layout';
+import ScrollToTop from 'react-scroll-to-top';
+import { ArrowUpIcon, ArrowUpTrayIcon } from '@heroicons/react/24/outline';
 
 export default function Home(): JSX.Element {
   const searchActions = useSearchActions();
@@ -84,6 +86,11 @@ export default function Home(): JSX.Element {
             </section>
           </div>
         </div>
+        <ScrollToTop
+          smooth
+          className="flex items-center justify-center rounded-md"
+          component={<ArrowUpIcon className="h-5 w-5" />}
+        />
       </Layout>
     </PageContextProvider>
   );
