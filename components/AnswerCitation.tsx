@@ -13,7 +13,7 @@ export const AnswerCitation = ({ reference }: Props) => {
 
   return (
     <a
-      href={`#${reference}`}
+      href={selectedCitation === `${reference}` && `#${reference}`}
       onClick={() => {
         if (selectedCitation === `${reference}`) {
           setSelectedCitation(null);
@@ -25,7 +25,7 @@ export const AnswerCitation = ({ reference }: Props) => {
       {' '}
       <button
         className={cn(
-          'px-[6px] relative -top-[2px] rounded-sm bg-slate-200 text-sm font-bold text-gray-600 hover:underline hover:bg-slate-300 transition ease-liner',
+          'px-[6px] relative -top-[2px] rounded-sm bg-blue-100 text-sm font-semibold text-gray-600 hover:underline hover:bg-blue-700 hover:text-white transition ease-liner',
           selectedCitation === reference && 'bg-blue-700 text-white'
         )}
       >
