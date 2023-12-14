@@ -8,7 +8,7 @@ type Props = {
   className?: string;
 };
 
-export const AnswerCitation = ({ reference, onClick, ...rest }: Props) => {
+export const AnswerCitation = ({ reference }: Props) => {
   const { selectedCitation, setSelectedCitation } = usePageContext();
 
   return (
@@ -28,8 +28,6 @@ export const AnswerCitation = ({ reference, onClick, ...rest }: Props) => {
           'px-[6px] relative -top-[2px] rounded-sm bg-slate-200 text-sm font-bold text-gray-600 hover:underline hover:bg-slate-300 transition ease-liner',
           selectedCitation === reference && 'bg-blue-700 text-white'
         )}
-        onClick={onClick}
-        {...rest}
       >
         {reference}
       </button>
