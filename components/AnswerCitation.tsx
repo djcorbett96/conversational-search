@@ -13,7 +13,7 @@ export const AnswerCitation = ({ reference }: Props) => {
 
   return (
     <a
-      href={selectedCitation === `${reference}` && `#${reference}`}
+      href={selectedCitation === `${reference}` ? `#${reference}` : undefined}
       onClick={() => {
         if (selectedCitation === `${reference}`) {
           setSelectedCitation(null);

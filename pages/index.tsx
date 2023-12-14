@@ -28,7 +28,11 @@ export default function Home(): JSX.Element {
   };
 
   React.useEffect(() => {
-    if (verticalResults && verticalResults.length > 0) {
+    if (
+      verticalResults &&
+      verticalResults.length > 0 &&
+      generatingAnswer === false
+    ) {
       const generateAnswer = async () => {
         setGeneratingAnswer(true);
         const generatedAnswer = await fetchAnswer(
@@ -40,7 +44,7 @@ export default function Home(): JSX.Element {
       };
       generateAnswer().catch((error) => console.log('error', error));
     }
-  }, [verticalResults, currentQuery]);
+  }, [verticalResults]);
 
   return (
     <PageContextProvider
