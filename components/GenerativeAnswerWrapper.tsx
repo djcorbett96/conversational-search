@@ -1,7 +1,5 @@
 import React from 'react';
-import { FaWandMagicSparkles } from 'react-icons/fa6';
 import { sanitizeCitations } from '../utils/citations/sanitizeCitations';
-import { reorderCitations } from '../utils/citations/reorderCitations';
 import GenerativeAnswer from './GenerativeAnswer';
 import { extractCitations } from '../utils/citations/extractCitations';
 import { testResults } from '../utils/testResults';
