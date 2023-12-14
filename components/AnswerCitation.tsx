@@ -8,13 +8,7 @@ type Props = {
   className?: string;
 };
 
-export const AnswerCitation = ({
-  reference,
-  isSelected,
-  onClick,
-  className,
-  ...rest
-}: Props) => {
+export const AnswerCitation = ({ reference, onClick, ...rest }: Props) => {
   const { selectedCitation, setSelectedCitation } = usePageContext();
 
   return (

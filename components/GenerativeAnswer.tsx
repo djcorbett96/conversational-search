@@ -6,7 +6,7 @@ import { AnswerCitation } from './AnswerCitation';
 const markDownCitations = (summary: string) => {
   const citations = extractCitations(summary);
   return citations
-    .reduce((accum, { text, references }, index) => {
+    .reduce((accum, { text, references }) => {
       if (references) {
         accum.push(text);
 
@@ -41,7 +41,6 @@ export default function GenerativeAnswer({ answer }: Props) {
   return (
     <div dir="auto">
       <Markdown
-        children={markdown}
         options={{
           forceBlock: true,
           overrides: {
@@ -50,7 +49,9 @@ export default function GenerativeAnswer({ answer }: Props) {
             },
           },
         }}
-      />
+      >
+        {markdown}
+      </Markdown>
     </div>
   );
 }

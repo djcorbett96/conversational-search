@@ -1,11 +1,4 @@
-import {
-  Pagination,
-  ResultsCount,
-  SearchBar,
-  SpellCheck,
-  VerticalResults,
-  onSearchFunc,
-} from '@yext/search-ui-react';
+import { SearchBar, SpellCheck, onSearchFunc } from '@yext/search-ui-react';
 import React from 'react';
 import { useSearchActions, useSearchState } from '@yext/search-headless-react';
 import { fetchAnswer } from '../utils/fetchAnswer';
@@ -46,7 +39,7 @@ export default function Home(): JSX.Element {
       };
       generateAnswer().catch((error) => console.log('error', error));
     }
-  }, [verticalResults]);
+  }, [verticalResults, currentQuery]);
 
   return (
     <PageContextProvider

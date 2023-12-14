@@ -12,7 +12,7 @@ const Sources = ({ sources }) => {
     <section className="flex gap-4">
       {uniqueSources.map((source, i) => {
         return (
-          <a href={source.rawData.c_file.url} target="_blank">
+          <a key={i} href={source.rawData.c_file.url} target="_blank">
             <div
               key={i}
               className="bg-slate-100 rounded-lg p-2 w-48 flex gap-2 hover:bg-slate-200 hover:cursor-pointer"
