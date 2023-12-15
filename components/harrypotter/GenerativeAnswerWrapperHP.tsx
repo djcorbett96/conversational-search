@@ -1,18 +1,21 @@
 import React from 'react';
-import { sanitizeCitations } from '../utils/citations/sanitizeCitations';
-import GenerativeAnswer from './GenerativeAnswer';
-import { extractCitations } from '../utils/citations/extractCitations';
-import { testResults } from '../utils/testResults';
-import Sources from './Sources';
+import { sanitizeCitations } from '../../utils/citations/sanitizeCitations';
+import GenerativeAnswer from '../GenerativeAnswer';
+import { extractCitations } from '../../utils/citations/extractCitations';
+import { testResults } from '../../utils/testResults';
+import SourcesHP from './SourcesHP';
 import { GrResources } from 'react-icons/gr';
 import { SlSpeech } from 'react-icons/sl';
+import { Result } from '@yext/search-headless-react';
 
 type Props = {
   answer: string;
+  results: Result[];
 };
 
-export default function GenerativeAnswerWrapper({ answer }: Props) {
-  const searchResults = testResults;
+export default function GenerativeAnswerWrapperHP({ answer, results }: Props) {
+  // const searchResults = testResults;
+  const searchResults = results;
   const rawSummary = answer;
   const unorderedSummary = sanitizeCitations(rawSummary);
   const citations = extractCitations(rawSummary);
@@ -42,7 +45,7 @@ export default function GenerativeAnswerWrapper({ answer }: Props) {
           <GrResources className="h-5 w-5" />
           <h3 className="text-lg">Sources</h3>
         </div>
-        <Sources sources={sourcesArray} />
+        <SourcesHP sources={sourcesArray} />
       </div>
     </div>
   );

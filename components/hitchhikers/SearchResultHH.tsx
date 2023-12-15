@@ -1,8 +1,8 @@
 import React from 'react';
-import { usePageContext } from '../utils/usePageContext';
-import { cn } from '../utils/cn';
+import { usePageContext } from '../../utils/usePageContext';
+import { cn } from '../../utils/cn';
 
-const SearchResult = ({ result }) => {
+const SearchResultHitchhikers = ({ result }) => {
   const { selectedCitation } = usePageContext();
 
   return (
@@ -27,7 +27,7 @@ const SearchResult = ({ result }) => {
           <p className="font-semibold">Source:</p>
           <a
             className="hover:cursor-pointer hover:underline w-fit text-blue-600"
-            href={result.rawData.c_file.url}
+            href={result.rawData.landingPageUrl}
           >
             <div>{result.rawData.name}</div>
           </a>
@@ -41,4 +41,4 @@ const SearchResult = ({ result }) => {
   );
 };
 
-export default SearchResult;
+export default SearchResultHitchhikers;
