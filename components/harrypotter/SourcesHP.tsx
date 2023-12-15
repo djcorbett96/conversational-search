@@ -15,7 +15,7 @@ const SourcesHP = ({ sources }) => {
           <a key={i} href={source.rawData.c_file.url} target="_blank">
             <div
               key={i}
-              className="bg-blue-100 rounded-md p-2 w-48 flex gap-2 hover:bg-gray-900 hover:text-white hover:cursor-pointer text-zinc-900"
+              className="bg-white rounded-md p-2 w-48 flex gap-2 hover:bg-[#0a3366] hover:text-white hover:cursor-pointer text-[#0a3366]"
             >
               <FaFilePdf className="w-8 h-8" />
               <p className="text-sm text-semibold line-clamp-2">

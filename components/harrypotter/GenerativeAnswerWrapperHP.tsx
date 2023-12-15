@@ -2,11 +2,11 @@ import React from 'react';
 import { sanitizeCitations } from '../../utils/citations/sanitizeCitations';
 import GenerativeAnswer from '../GenerativeAnswer';
 import { extractCitations } from '../../utils/citations/extractCitations';
-import { testResults } from '../../utils/testResults';
 import SourcesHP from './SourcesHP';
 import { GrResources } from 'react-icons/gr';
-import { SlSpeech } from 'react-icons/sl';
 import { Result } from '@yext/search-headless-react';
+import { FaWandMagicSparkles } from 'react-icons/fa6';
+import { usePageContext } from '../../utils/usePageContext';
 
 type Props = {
   answer: string;
@@ -14,6 +14,7 @@ type Props = {
 };
 
 export default function GenerativeAnswerWrapperHP({ answer, results }: Props) {
+  const { generatingAnswer } = usePageContext();
   // const searchResults = testResults;
   const searchResults = results;
   const rawSummary = answer;
@@ -32,21 +33,25 @@ export default function GenerativeAnswerWrapperHP({ answer, results }: Props) {
   });
 
   return (
-    <div className="flex flex-col gap-8 mb-10">
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-2">
-          <SlSpeech className="h-5 w-5" />
-          <h3 className="text-lg">Answer</h3>
-        </div>
-        <GenerativeAnswer answer={unorderedSummary} />
-      </div>
-      <div className="flex flex-col gap-4">
-        <div className="flex items-center gap-2">
-          <GrResources className="h-5 w-5" />
-          <h3 className="text-lg">Sources</h3>
-        </div>
-        <SourcesHP sources={sourcesArray} />
-      </div>
+    <div className="w-full flex flex-col gap-10 max-w-3xl text-[#0a3366]">
+      {!generatingAnswer && (
+        <>
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-2">
+              <FaWandMagicSparkles className="h-5 w-5" />
+              <h3 className="text-lg">Generative Answer</h3>
+            </div>
+            <GenerativeAnswer answer={unorderedSummary} />
+          </div>
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-2">
+              <GrResources className="h-5 w-5" />
+              <h3 className="text-lg">Sources</h3>
+            </div>
+            <SourcesHP sources={sourcesArray} />
+          </div>
+        </>
+      )}
     </div>
   );
 }

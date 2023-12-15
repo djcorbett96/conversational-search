@@ -34,10 +34,12 @@
     "@yext/search-headless-react": "^2.4.0",
     "@yext/search-ui-react": "^1.4.0",
     "clsx": "^2.0.0",
+    "framer-motion": "^6.5.1",
     "markdown-to-jsx": "^7.3.2",
     "next": "^12.1.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-icons": "^4.12.0"
+    "react-icons": "^4.12.0",
+    "react-loading-icons": "^1.1.0"
   }
 }

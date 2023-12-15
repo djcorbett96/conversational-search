@@ -8,17 +8,16 @@ import {
   useSearchState,
 } from '@yext/search-headless-react';
 import { fetchAnswer } from '../utils/fetchAnswer';
-import Loading from '../components/Loading';
 import GenerativeAnswerWrapperHP from '../components/harrypotter/GenerativeAnswerWrapperHP';
 import { PageContextProvider } from '../utils/usePageContext';
 import { testResults } from '../utils/testResults';
 import { testAnswer } from '../utils/testAnswer';
-import Divider from '../components/Divider';
 import { MdOutlineManageSearch } from 'react-icons/md';
-import { ArrowUpIcon } from '@heroicons/react/24/outline';
 import SearchResultsHP from '../components/harrypotter/SearchResultsHP';
 import { usePageSetupEffect } from '../utils/usePageSetupEffect';
 import ScrollToTopButton from '../components/ScrollButton';
+import { motion } from 'framer-motion';
+import { Bars } from 'react-loading-icons';
 
 const config: HeadlessConfig = {
   apiKey: 'b083465ee2ad3d23460e150c6a297f7f',
@@ -39,8 +38,9 @@ export default function HarryPotter(): JSX.Element {
 function Inner(): JSX.Element {
   const searchActions = useSearchActions();
   const verticalResults = useSearchState((state) => state.vertical.results);
-  // const verticalResults = testResults;
   const currentQuery = useSearchState((state) => state.query.mostRecentSearch);
+  // const verticalResults = testResults;
+  // const currentQuery = 'test';
   const [generatingAnswer, setGeneratingAnswer] = React.useState(false);
   const [answer, setAnswer] = React.useState();
   const [selectedCitation, setSelectedCitation] = React.useState(null);
@@ -84,39 +84,58 @@ function Inner(): JSX.Element {
       value={{
         selectedCitation,
         setSelectedCitation,
+        generatingAnswer,
+        setGeneratingAnswer,
       }}
     >
-      <div className="flex justify-center px-4 py-6">
-        <div className="w-full max-w-3xl flex flex-col">
-          <SearchBar
-            onSearch={handleSearch}
-            placeholder="Test your knowledge of the wizarding world..."
-          />
-          <SpellCheck />
-          {generatingAnswer && (
-            <div className="flex items-center gap-2">
-              <Loading />
-              <p>Generating answer...</p>
-            </div>
-          )}
-          {!generatingAnswer && answer && (
-            <GenerativeAnswerWrapperHP
-              results={verticalResults}
-              answer={answer}
+      <div className="flex justify-center py-10">
+        <div className="w-full flex flex-col items-center">
+          <div className="w-full max-w-3xl flex flex-col">
+            <SearchBar
+              onSearch={handleSearch}
+              placeholder="Test your knowledge of the wizarding world..."
             />
+            <SpellCheck />
+          </div>
+          {currentQuery && (
+            <motion.div
+              layout
+              className="w-full flex flex-col bg-[#e3eefc] items-center"
+            >
+              <div className="max-w-3xl py-10 w-full">
+                {answer && !generatingAnswer && (
+                  <GenerativeAnswerWrapperHP
+                    results={verticalResults}
+                    answer={answer}
+                  />
+                )}
+                {generatingAnswer && (
+                  <>
+                    <div className="flex items-center gap-2 text-lg text=[#0a3366]">
+                      <Bars className="h-5 w-5" fill="#0a3366" speed={0.5} />
+                      <p>Generating Answer...</p>
+                    </div>
+                  </>
+                )}
+              </div>
+            </motion.div>
           )}
-          {currentQuery && answer && !generatingAnswer && <Divider />}
-          <section className="flex flex-col">
-            {verticalResults && verticalResults.length > 0 && currentQuery && (
-              <>
-                <div className="mt-8 mb-0 py-0 flex gap-2 items-center">
-                  <MdOutlineManageSearch className="w-5 h-5" />
-                  <h3 className="text-lg">Raw Results</h3>
-                </div>
-                <SearchResultsHP results={verticalResults} />
-              </>
-            )}
-          </section>
+          <div className="w-full flex flex-col max-w-3xl">
+            {/* {currentQuery && answer && !generatingAnswer && <Divider />} */}
+            <section className="flex flex-col">
+              {verticalResults &&
+                verticalResults.length > 0 &&
+                currentQuery && (
+                  <>
+                    <div className="mt-8 mb-0 py-0 flex gap-2 items-center">
+                      <MdOutlineManageSearch className="w-5 h-5" />
+                      <h3 className="text-lg">Raw Results</h3>
+                    </div>
+                    <SearchResultsHP results={verticalResults} />
+                  </>
+                )}
+            </section>
+          </div>
         </div>
       </div>
       <ScrollToTopButton />
