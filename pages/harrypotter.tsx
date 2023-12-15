@@ -60,24 +60,24 @@ function Inner(): JSX.Element {
     history.pushState(null, '', '?' + queryParams.toString());
   };
 
-  // React.useEffect(() => {
-  //   if (
-  //     verticalResults &&
-  //     verticalResults.length > 0 &&
-  //     generatingAnswer === false
-  //   ) {
-  //     const generateAnswer = async () => {
-  //       setGeneratingAnswer(true);
-  //       const generatedAnswer = await fetchAnswer(
-  //         currentQuery,
-  //         verticalResults
-  //       );
-  //       setAnswer(generatedAnswer);
-  //       setGeneratingAnswer(false);
-  //     };
-  //     generateAnswer().catch((error) => console.log('error', error));
-  //   }
-  // }, [verticalResults]);
+  React.useEffect(() => {
+    if (
+      verticalResults &&
+      verticalResults.length > 0 &&
+      generatingAnswer === false
+    ) {
+      const generateAnswer = async () => {
+        setGeneratingAnswer(true);
+        const generatedAnswer = await fetchAnswer(
+          currentQuery,
+          verticalResults
+        );
+        setAnswer(generatedAnswer);
+        setGeneratingAnswer(false);
+      };
+      generateAnswer().catch((error) => console.log('error', error));
+    }
+  }, [verticalResults]);
 
   return (
     <PageContextProvider
