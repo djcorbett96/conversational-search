@@ -12,9 +12,7 @@ import GenerativeAnswerWrapperHH from '../components/hitchhikers/GenerativeAnswe
 import { PageContextProvider } from '../utils/usePageContext';
 import { testResults } from '../utils/testResults';
 import { testAnswer } from '../utils/testAnswer';
-import Divider from '../components/Divider';
-import { MdOutlineManageSearch } from 'react-icons/md';
-import { ArrowUpIcon } from '@heroicons/react/24/outline';
+import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 import SearchResultsHH from '../components/hitchhikers/SearchResultsHH';
 import { usePageSetupEffect } from '../utils/usePageSetupEffect';
 import ScrollToTopButton from '../components/ScrollButton';
@@ -112,7 +110,7 @@ function Inner(): JSX.Element {
                 )}
                 {generatingAnswer && (
                   <>
-                    <div className="flex items-center gap-2 text-lg text=[#0a3366]">
+                    <div className="flex items-center gap-2 text-lg text-[#0a3366]">
                       <Bars className="h-5 w-5" fill="#0a3366" speed={0.5} />
                       <p>Generating Answer...</p>
                     </div>
@@ -129,8 +127,8 @@ function Inner(): JSX.Element {
                 currentQuery && (
                   <>
                     <div className="mt-8 mb-0 py-0 flex gap-2 items-center">
-                      <MdOutlineManageSearch className="w-5 h-5" />
-                      <h3 className="text-lg">Raw Results</h3>
+                      <DocumentDuplicateIcon className="w-5 h-5" />
+                      <h3 className="text-lg">Search Results</h3>
                     </div>
                     <SearchResultsHH results={verticalResults} />
                   </>

@@ -12,12 +12,12 @@ import GenerativeAnswerWrapperHP from '../components/harrypotter/GenerativeAnswe
 import { PageContextProvider } from '../utils/usePageContext';
 import { testResults } from '../utils/testResults';
 import { testAnswer } from '../utils/testAnswer';
-import { MdOutlineManageSearch } from 'react-icons/md';
 import SearchResultsHP from '../components/harrypotter/SearchResultsHP';
 import { usePageSetupEffect } from '../utils/usePageSetupEffect';
 import ScrollToTopButton from '../components/ScrollButton';
 import { motion } from 'framer-motion';
 import { Bars } from 'react-loading-icons';
+import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 
 const config: HeadlessConfig = {
   apiKey: 'b083465ee2ad3d23460e150c6a297f7f',
@@ -37,12 +37,12 @@ export default function HarryPotter(): JSX.Element {
 
 function Inner(): JSX.Element {
   const searchActions = useSearchActions();
-  const verticalResults = useSearchState((state) => state.vertical.results);
-  const currentQuery = useSearchState((state) => state.query.mostRecentSearch);
-  // const verticalResults = testResults;
-  // const currentQuery = 'test';
+  // const verticalResults = useSearchState((state) => state.vertical.results);
+  // const currentQuery = useSearchState((state) => state.query.mostRecentSearch);
+  const verticalResults = testResults;
+  const currentQuery = 'test';
   const [generatingAnswer, setGeneratingAnswer] = React.useState(false);
-  const [answer, setAnswer] = React.useState();
+  const [answer, setAnswer] = React.useState(testAnswer);
   const [selectedCitation, setSelectedCitation] = React.useState(null);
   usePageSetupEffect();
 
@@ -60,24 +60,24 @@ function Inner(): JSX.Element {
     history.pushState(null, '', '?' + queryParams.toString());
   };
 
-  React.useEffect(() => {
-    if (
-      verticalResults &&
-      verticalResults.length > 0 &&
-      generatingAnswer === false
-    ) {
-      const generateAnswer = async () => {
-        setGeneratingAnswer(true);
-        const generatedAnswer = await fetchAnswer(
-          currentQuery,
-          verticalResults
-        );
-        setAnswer(generatedAnswer);
-        setGeneratingAnswer(false);
-      };
-      generateAnswer().catch((error) => console.log('error', error));
-    }
-  }, [verticalResults]);
+  // React.useEffect(() => {
+  //   if (
+  //     verticalResults &&
+  //     verticalResults.length > 0 &&
+  //     generatingAnswer === false
+  //   ) {
+  //     const generateAnswer = async () => {
+  //       setGeneratingAnswer(true);
+  //       const generatedAnswer = await fetchAnswer(
+  //         currentQuery,
+  //         verticalResults
+  //       );
+  //       setAnswer(generatedAnswer);
+  //       setGeneratingAnswer(false);
+  //     };
+  //     generateAnswer().catch((error) => console.log('error', error));
+  //   }
+  // }, [verticalResults]);
 
   return (
     <PageContextProvider
@@ -111,7 +111,7 @@ function Inner(): JSX.Element {
                 )}
                 {generatingAnswer && (
                   <>
-                    <div className="flex items-center gap-2 text-lg text=[#0a3366]">
+                    <div className="flex items-center gap-2 text-lg text-[#0a3366]">
                       <Bars className="h-5 w-5" fill="#0a3366" speed={0.5} />
                       <p>Generating Answer...</p>
                     </div>
@@ -128,8 +128,8 @@ function Inner(): JSX.Element {
                 currentQuery && (
                   <>
                     <div className="mt-8 mb-0 py-0 flex gap-2 items-center">
-                      <MdOutlineManageSearch className="w-5 h-5" />
-                      <h3 className="text-lg">Raw Results</h3>
+                      <DocumentDuplicateIcon className="w-6 h-6" />
+                      <h3 className="text-lg">Search Results</h3>
                     </div>
                     <SearchResultsHP results={verticalResults} />
                   </>
