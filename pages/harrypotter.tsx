@@ -37,12 +37,12 @@ export default function HarryPotter(): JSX.Element {
 
 function Inner(): JSX.Element {
   const searchActions = useSearchActions();
-  // const verticalResults = useSearchState((state) => state.vertical.results);
-  // const currentQuery = useSearchState((state) => state.query.mostRecentSearch);
-  const verticalResults = testResults;
-  const currentQuery = 'test';
+  const verticalResults = useSearchState((state) => state.vertical.results);
+  const currentQuery = useSearchState((state) => state.query.mostRecentSearch);
+  // const verticalResults = testResults;
+  // const currentQuery = 'test';
   const [generatingAnswer, setGeneratingAnswer] = React.useState(false);
-  const [answer, setAnswer] = React.useState(testAnswer);
+  const [answer, setAnswer] = React.useState();
   const [selectedCitation, setSelectedCitation] = React.useState(null);
   usePageSetupEffect();
 
