@@ -39,7 +39,7 @@ export default function GenerativeAnswer({ answer }: Props) {
   const markdown = markDownCitations(answer);
 
   return (
-    <div dir="auto">
+    <div dir="auto" className="markdown-reverts">
       <Markdown
         options={{
           forceBlock: true,

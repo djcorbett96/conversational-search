@@ -15,7 +15,7 @@ const SourcesHH = ({ sources }) => {
           <a key={i} href={source.rawData.landingPageUrl} target="_blank">
             <div
               key={i}
-              className="bg-white rounded-md p-2 w-48 flex gap-2 hover:bg-[#0a3366] hover:text-white hover:cursor-pointer text-[#0a3366]"
+              className="bg-white rounded-md p-2 w-48 flex gap-2 hover:bg-[#0a3366] hover:text-white hover:cursor-pointer text-[#0a3366] transition ease-linear"
             >
               <FaFilePdf className="w-8 h-8" />
               <p className="text-sm text-semibold line-clamp-2">

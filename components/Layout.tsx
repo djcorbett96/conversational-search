@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BookOpenIcon, DocumentIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
@@ -8,14 +8,19 @@ function classNames(...classes) {
 
 export default function Layout({ children }) {
   const [selectedExperience, setSelectedExperience] = useState('Harry Potter');
+  useEffect(() => {
+    if (window.location.pathname === '/hitchhikers') {
+      setSelectedExperience('Hitchhikers');
+    }
+  }, []);
 
   return (
     <>
       <div>
         {/* Static sidebar for desktop */}
-        <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-80 lg:flex-col">
+        <div className="lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-1/4 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-zinc-900 p-6">
+          <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 p-6">
             <h1 className="text-white font-semibold text-lg">
               Conversational Search Demo
             </h1>

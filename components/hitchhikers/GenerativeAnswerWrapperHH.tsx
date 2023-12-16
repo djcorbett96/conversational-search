@@ -2,20 +2,19 @@ import React from 'react';
 import { sanitizeCitations } from '../../utils/citations/sanitizeCitations';
 import GenerativeAnswer from '../GenerativeAnswer';
 import { extractCitations } from '../../utils/citations/extractCitations';
-import { testResults } from '../../utils/testResults';
-import SourcesHH from './SourcesHH';
 import { GrResources } from 'react-icons/gr';
-import { SlSpeech } from 'react-icons/sl';
 import { Result } from '@yext/search-headless-react';
-import { usePageContext } from '../../utils/usePageContext';
 import { FaWandMagicSparkles } from 'react-icons/fa6';
+import { usePageContext } from '../../utils/usePageContext';
+import FollowUpButton from '../FollowUpButton';
+import SourcesHH from './SourcesHH';
 
 type Props = {
   answer: string;
   results: Result[];
 };
 
-export default function GenerativeAnswerWrapperHH({ answer, results }: Props) {
+export default function GenerativeAnswerWrapperHP({ answer, results }: Props) {
   const { generatingAnswer } = usePageContext();
   // const searchResults = testResults;
   const searchResults = results;
@@ -35,25 +34,22 @@ export default function GenerativeAnswerWrapperHH({ answer, results }: Props) {
   });
 
   return (
-    <div className="w-full flex flex-col gap-10 max-w-3xl text-[#0a3366]">
-      {!generatingAnswer && (
-        <>
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2">
-              <FaWandMagicSparkles className="h-5 w-5" />
-              <h3 className="text-lg">Generative Answer</h3>
-            </div>
-            <GenerativeAnswer answer={unorderedSummary} />
-          </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-2">
-              <GrResources className="h-5 w-5" />
-              <h3 className="text-lg">Sources</h3>
-            </div>
-            <SourcesHH sources={sourcesArray} />
-          </div>
-        </>
-      )}
+    <div className="w-full flex flex-col gap-6 max-w-3xl text-[#0a3366]">
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center gap-2">
+          <FaWandMagicSparkles className="h-5 w-5" />
+          <h3 className="text-lg">Generative Answer</h3>
+        </div>
+        <GenerativeAnswer answer={unorderedSummary} />
+      </div>
+      <div className="flex flex-col gap-4">
+        <div className="flex items-center gap-2">
+          <GrResources className="h-5 w-5" />
+          <h3 className="text-lg">Sources</h3>
+        </div>
+        <SourcesHH sources={sourcesArray} />
+      </div>
+      <FollowUpButton />
     </div>
   );
 }

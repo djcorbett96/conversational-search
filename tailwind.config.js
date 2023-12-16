@@ -4,6 +4,7 @@ module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
+    'node_modules/@yext/chat-ui-react/lib/**/*.{js,jsx}',
     ComponentsContentPath,
   ],
   theme: {
