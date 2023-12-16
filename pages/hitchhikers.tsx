@@ -67,6 +67,7 @@ function Inner(): JSX.Element {
   usePageSetupEffect();
 
   const handleSearch: onSearchFunc = (searchEventData) => {
+    setAnswer(undefined);
     chatActions.restartConversation();
     const { query } = searchEventData;
     searchActions.setQuery(query);

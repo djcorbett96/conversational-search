@@ -8,11 +8,9 @@ import {
   useSearchState,
 } from '@yext/search-headless-react';
 import { fetchAnswer } from '../utils/fetchAnswer';
-import GenerativeAnswerWrapperHP from '../components/harrypotter/GenerativeAnswerWrapperHP';
 import { PageContextProvider } from '../utils/usePageContext';
 import { testResults } from '../utils/testResults';
 import { testAnswer } from '../utils/testAnswer';
-import SearchResultsHP from '../components/harrypotter/SearchResultsHP';
 import { usePageSetupEffect } from '../utils/usePageSetupEffect';
 import ScrollToTopButton from '../components/ScrollButton';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -24,8 +22,10 @@ import {
   ChatConfig,
   ChatHeadlessProvider,
   useChatActions,
+  useChatState,
 } from '@yext/chat-headless-react';
-import { cn } from '../utils/cn';
+import GenerativeAnswerWrapperHP from '../components/harrypotter/GenerativeAnswerWrapperHP';
+import SearchResultsHP from '../components/harrypotter/SearchResultsHP';
 
 const config: HeadlessConfig = {
   apiKey: 'b083465ee2ad3d23460e150c6a297f7f',
@@ -61,17 +61,23 @@ function Inner(): JSX.Element {
   const [selectedCitation, setSelectedCitation] = React.useState(null);
   const [chatMode, setChatMode] = useState(false);
   const chatActions = useChatActions();
+  const totalMessages = useChatState(
+    (state) => state.conversation.messages.length
+  );
   usePageSetupEffect();
 
   const handleSearch: onSearchFunc = (searchEventData) => {
+    setAnswer(undefined);
     chatActions.restartConversation();
     const { query } = searchEventData;
     searchActions.setQuery(query);
     searchActions.executeVerticalQuery();
-    chatActions.addMessage({
-      source: 'USER',
-      text: query,
-    });
+    if (totalMessages === 0) {
+      chatActions.addMessage({
+        source: 'USER',
+        text: query,
+      });
+    }
     const queryParams = new URLSearchParams(window.location.search);
 
     if (query) {
@@ -128,13 +134,13 @@ function Inner(): JSX.Element {
               className="flex justify-center py-6"
             >
               <div className="w-full flex flex-col items-center">
-                <motion.div layout className="w-full max-w-3xl flex flex-col">
+                <div className="w-full max-w-3xl flex flex-col">
                   <SearchBar
                     onSearch={handleSearch}
                     placeholder="Test your knowledge of the wizarding world..."
                   />
                   <SpellCheck />
-                </motion.div>
+                </div>
                 {currentQuery && (
                   <motion.div
                     layout
