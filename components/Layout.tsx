@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
-import { BookOpenIcon, DocumentIcon } from '@heroicons/react/24/outline';
+import {
+  BookOpenIcon,
+  DocumentIcon,
+  DocumentTextIcon,
+} from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { BsKeyboard } from 'react-icons/bs';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -11,6 +16,9 @@ export default function Layout({ children }) {
   useEffect(() => {
     if (window.location.pathname === '/hitchhikers') {
       setSelectedExperience('Hitchhikers');
+    }
+    if (window.location.pathname === '/roland') {
+      setSelectedExperience('Roland');
     }
   }, []);
 
@@ -58,11 +66,30 @@ export default function Layout({ children }) {
                           )}
                           onClick={() => setSelectedExperience('Hitchhikers')}
                         >
-                          <BookOpenIcon
+                          <DocumentTextIcon
                             className="h-6 w-6 shrink-0"
                             aria-hidden="true"
                           />
                           Hitchhikers
+                        </div>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/roland">
+                        <div
+                          className={classNames(
+                            selectedExperience === 'Roland'
+                              ? 'bg-gray-800 text-white'
+                              : 'text-gray-400 hover:text-white hover:bg-gray-800',
+                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold cursor-pointer'
+                          )}
+                          onClick={() => setSelectedExperience('Roland')}
+                        >
+                          <BsKeyboard
+                            className="h-6 w-6 shrink-0"
+                            aria-hidden="true"
+                          />
+                          Roland
                         </div>
                       </Link>
                     </li>

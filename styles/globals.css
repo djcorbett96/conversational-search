@@ -9,6 +9,7 @@ html {
 .markdown-reverts ol,
 .markdown-reverts ul {
   list-style: auto;
+  padding: revert;
 }
 
 .markdown-reverts a {
@@ -23,6 +24,7 @@ html {
 .yext-chat-message-bubble__bubble ol,
 .yext-chat-message-bubble__bubble ul {
   list-style: auto;
+  padding: revert;
 }
 
 .yext-chat-message-bubble__bubble a {
