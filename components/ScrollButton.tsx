@@ -27,7 +27,7 @@ const ScrollToTopButton = () => {
       top: 0,
       behavior: 'smooth',
     });
-    setSelectedCitation('');
+    setSelectedCitation(null);
   };
 
   return (
