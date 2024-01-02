@@ -1,19 +1,32 @@
 import { useEffect, useState } from 'react';
-import {
-  BookOpenIcon,
-  DocumentIcon,
-  DocumentTextIcon,
-} from '@heroicons/react/24/outline';
+import { BookOpenIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { BsKeyboard } from 'react-icons/bs';
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
+import { cn } from '../utils/cn';
 
 export default function Layout({ children }) {
-  const [selectedExperience, setSelectedExperience] = useState('Harry Potter');
+  const experiences = [
+    {
+      name: 'Harry Potter',
+      link: '/harrypotter',
+      icon: BookOpenIcon,
+    },
+    {
+      name: 'Hitchhikers',
+      link: '/hitchhikers',
+      icon: DocumentTextIcon,
+    },
+    {
+      name: 'Roland',
+      link: '/roland',
+      icon: BsKeyboard,
+    },
+  ];
+  const [selectedExperience, setSelectedExperience] = useState('');
   useEffect(() => {
+    if (window.location.pathname === '/harrypotter') {
+      setSelectedExperience('Harry Potter');
+    }
     if (window.location.pathname === '/hitchhikers') {
       setSelectedExperience('Hitchhikers');
     }
@@ -26,7 +39,7 @@ export default function Layout({ children }) {
     <>
       <div>
         {/* Static sidebar for desktop */}
-        <div className="lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-1/4 lg:flex-col">
+        <div className="lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-80 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 p-6">
             <h1 className="text-white font-semibold text-lg">
@@ -36,63 +49,31 @@ export default function Layout({ children }) {
               <ul role="list" className="flex flex-1 flex-col gap-y-7">
                 <li>
                   <ul role="list" className="-mx-2 space-y-1">
-                    <li>
-                      <Link href="/harrypotter">
-                        <div
-                          className={classNames(
-                            selectedExperience === 'Harry Potter'
-                              ? 'bg-gray-800 text-white'
-                              : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold cursor-pointer'
-                          )}
-                          onClick={() => setSelectedExperience('Harry Potter')}
-                        >
-                          <BookOpenIcon
-                            className="h-6 w-6 shrink-0"
-                            aria-hidden="true"
-                          />
-                          Harry Potter
-                        </div>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/hitchhikers">
-                        <div
-                          className={classNames(
-                            selectedExperience === 'Hitchhikers'
-                              ? 'bg-gray-800 text-white'
-                              : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold cursor-pointer'
-                          )}
-                          onClick={() => setSelectedExperience('Hitchhikers')}
-                        >
-                          <DocumentTextIcon
-                            className="h-6 w-6 shrink-0"
-                            aria-hidden="true"
-                          />
-                          Hitchhikers
-                        </div>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/roland">
-                        <div
-                          className={classNames(
-                            selectedExperience === 'Roland'
-                              ? 'bg-gray-800 text-white'
-                              : 'text-gray-400 hover:text-white hover:bg-gray-800',
-                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold cursor-pointer'
-                          )}
-                          onClick={() => setSelectedExperience('Roland')}
-                        >
-                          <BsKeyboard
-                            className="h-6 w-6 shrink-0"
-                            aria-hidden="true"
-                          />
-                          Roland
-                        </div>
-                      </Link>
-                    </li>
+                    {experiences.map((experience, i) => {
+                      return (
+                        <li key={i}>
+                          <Link href={experience.link}>
+                            <div
+                              className={cn(
+                                selectedExperience === experience.name
+                                  ? 'bg-gray-800 text-white'
+                                  : 'text-gray-400 hover:text-white hover:bg-gray-800',
+                                'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold cursor-pointer'
+                              )}
+                              onClick={() =>
+                                setSelectedExperience(experience.name)
+                              }
+                            >
+                              <experience.icon
+                                className="h-6 w-6 shrink-0"
+                                aria-hidden="true"
+                              />
+                              {experience.name}
+                            </div>
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </li>
               </ul>

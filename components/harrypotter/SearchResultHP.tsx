@@ -1,7 +1,7 @@
 import React from 'react';
 import { usePageContext } from '../../utils/usePageContext';
 import { cn } from '../../utils/cn';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const SearchResult = ({ result }) => {
   const { selectedCitation } = usePageContext();
