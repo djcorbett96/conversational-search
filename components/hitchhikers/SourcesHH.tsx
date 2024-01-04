@@ -9,7 +9,7 @@ const SourcesHH = ({ sources }) => {
     return accumulator;
   }, []);
   return (
-    <section className="flex gap-2">
+    <section className="flex gap-2 flex-wrap">
       {uniqueSources.map((source, i) => {
         return (
           <a key={i} href={source.rawData.landingPageUrl} target="_blank">
