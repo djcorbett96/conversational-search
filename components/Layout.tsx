@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BookOpenIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { BsKeyboard } from 'react-icons/bs';
+import { BsWifi } from 'react-icons/bs';
 import { cn } from '../utils/cn';
 
 export default function Layout({ children }) {
@@ -17,10 +17,15 @@ export default function Layout({ children }) {
       icon: DocumentTextIcon,
     },
     {
-      name: 'Roland',
-      link: '/roland',
-      icon: BsKeyboard,
+      name: 'Telus',
+      link: '/telus',
+      icon: BsWifi,
     },
+    // {
+    //   name: 'Roland',
+    //   link: '/roland',
+    //   icon: BsKeyboard,
+    // },
   ];
   const [selectedExperience, setSelectedExperience] = useState('');
   useEffect(() => {
@@ -32,6 +37,9 @@ export default function Layout({ children }) {
     }
     if (window.location.pathname === '/roland') {
       setSelectedExperience('Roland');
+    }
+    if (window.location.pathname === '/telus') {
+      setSelectedExperience('Telus');
     }
   }, []);
 
