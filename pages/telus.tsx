@@ -36,7 +36,7 @@ const config: HeadlessConfig = {
 
 const chatConfig: ChatConfig = {
   apiKey: 'c4958314f662a3ccfaab5a5ad68bd084',
-  botId: 'harry-potter',
+  botId: 'telus-bot',
 };
 
 export default function Telus(): JSX.Element {
