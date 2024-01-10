@@ -16,11 +16,11 @@ export default function Layout({ children }) {
       link: '/hitchhikers',
       icon: DocumentTextIcon,
     },
-    {
-      name: 'Telus',
-      link: '/telus',
-      icon: BsWifi,
-    },
+    // {
+    //   name: 'Telus',
+    //   link: '/telus',
+    //   icon: BsWifi,
+    // },
     // {
     //   name: 'Roland',
     //   link: '/roland',
