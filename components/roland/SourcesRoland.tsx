@@ -20,7 +20,7 @@ const SourcesRoland = ({ sources }) => {
           >
             <div
               key={i}
-              className="bg-white rounded-md p-2 w-48 flex gap-2 items-center hover:bg-[#0a3366] hover:text-white hover:cursor-pointer text-[#0a3366] transition ease-linear"
+              className="bg-white rounded-md p-2 w-48 flex gap-2 items-center hover:bg-[#0a3366] hover:text-white hover:cursor-pointer text-[#0a3366] transition ease-linear h-full"
             >
               {source.rawData.type === 'helpArticle' ? (
                 <SiZendesk className="w-4 min-w-[1rem] min-h-[1rem] h-4" />

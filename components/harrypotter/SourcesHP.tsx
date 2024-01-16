@@ -19,7 +19,7 @@ const SourcesHP = ({ sources }) => {
           >
             <div
               key={i}
-              className="bg-white rounded-md p-2 w-48 flex gap-2 hover:bg-[#0a3366] hover:text-white hover:cursor-pointer text-[#0a3366] transition ease-linear"
+              className="bg-white rounded-md p-2 w-48 flex gap-2 hover:bg-[#0a3366] hover:text-white hover:cursor-pointer text-[#0a3366] transition ease-linear h-full"
             >
               <FaFilePdf className="w-8 h-8" />
               <p className="text-sm text-semibold line-clamp-2">
