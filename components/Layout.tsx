@@ -16,6 +16,11 @@ export default function Layout({ children }) {
       link: '/hitchhikers',
       icon: DocumentTextIcon,
     },
+    {
+      name: 'Book of Mormon',
+      link: '/mormon',
+      icon: DocumentTextIcon,
+    },
     // {
     //   name: 'Telus',
     //   link: '/telus',
