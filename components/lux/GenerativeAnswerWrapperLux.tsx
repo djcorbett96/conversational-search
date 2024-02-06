@@ -22,7 +22,6 @@ export default function GenerativeAnswerWrapperHP({ answer, results }: Props) {
   const cleanAnswer = answerCitationSplit && answerCitationSplit[0];
   const citationsArray =
     answerCitationSplit && JSON.parse(answerCitationSplit[1]);
-  console.log(citationsArray);
   const sourcesArray =
     citationsArray &&
     citationsArray.map((i) => {

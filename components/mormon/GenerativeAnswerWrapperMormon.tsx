@@ -19,12 +19,15 @@ export default function GenerativeAnswerWrapperHP({ answer, results }: Props) {
   const searchResults = results;
   const rawSummary = answer;
   const answerCitationSplit = sanitizeCitations(rawSummary);
-  const cleanAnswer = answerCitationSplit[0];
-  const citationsArray = JSON.parse(answerCitationSplit[1]);
-  const sourcesArray = citationsArray.map((i) => {
-    const source = searchResults.find((result) => result.id === i);
-    return source;
-  });
+  const cleanAnswer = answerCitationSplit && answerCitationSplit[0];
+  const citationsArray =
+    answerCitationSplit && JSON.parse(answerCitationSplit[1]);
+  const sourcesArray =
+    citationsArray &&
+    citationsArray.map((i) => {
+      const source = searchResults.find((result) => result.id === i);
+      return source;
+    });
 
   return (
     <div className="w-full flex flex-col gap-6 max-w-3xl text-[#0a3366]">
