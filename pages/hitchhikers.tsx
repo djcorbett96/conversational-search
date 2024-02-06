@@ -15,7 +15,12 @@ import { usePageSetupEffect } from '../utils/usePageSetupEffect';
 import ScrollToTopButton from '../components/ScrollButton';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Bars } from 'react-loading-icons';
-import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
+import {
+  ChatBubbleLeftEllipsisIcon,
+  ChatBubbleLeftIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
+  DocumentDuplicateIcon,
+} from '@heroicons/react/24/outline';
 import { BsArrowLeft } from 'react-icons/bs';
 import { ChatPanel } from '@yext/chat-ui-react';
 import {
@@ -26,6 +31,8 @@ import {
 } from '@yext/chat-headless-react';
 import GenerativeAnswerWrapperHH from '../components/hitchhikers/GenerativeAnswerWrapperHH';
 import SearchResultsHH from '../components/hitchhikers/SearchResultsHH';
+import { Skeleton } from '../components/Skeleton';
+import { FaWandMagicSparkles } from 'react-icons/fa6';
 
 const config: HeadlessConfig = {
   apiKey: '01db1d1e5ebbaa7ea2e6807ad2196ab3',
@@ -57,8 +64,9 @@ function Inner(): JSX.Element {
   // const verticalResults = testResults;
   // const currentQuery = 'Who is Albus Dumbledore?';
   const [generatingAnswer, setGeneratingAnswer] = React.useState(false);
-  const [answer, setAnswer] = React.useState();
+  const [answer, setAnswer] = React.useState(null);
   const [selectedCitation, setSelectedCitation] = React.useState(null);
+  const isLoading = useSearchState((state) => state.searchStatus.isLoading);
   const [chatMode, setChatMode] = useState(false);
   const chatActions = useChatActions();
   const totalMessages = useChatState(
@@ -92,6 +100,7 @@ function Inner(): JSX.Element {
     if (
       verticalResults &&
       verticalResults.length > 0 &&
+      isLoading === false &&
       generatingAnswer === false
     ) {
       const generateAnswer = async () => {
@@ -125,15 +134,8 @@ function Inner(): JSX.Element {
       <AnimatePresence>
         {!chatMode && (
           <>
-            <motion.div
-              key="search-ui"
-              // initial={{ y: '-100vh' }}
-              // animate={{ y: 0 }}
-              exit={{ y: '-100vh' }}
-              transition={{ duration: 0.3 }}
-              className="flex justify-center py-6"
-            >
-              <div className="w-full flex flex-col items-center">
+            <div className="flex justify-center py-6">
+              <div className="w-full flex flex-col items-center gap-4">
                 <div className="w-full max-w-3xl flex flex-col">
                   <SearchBar
                     onSearch={handleSearch}
@@ -141,51 +143,57 @@ function Inner(): JSX.Element {
                   />
                   <SpellCheck />
                 </div>
-                {currentQuery && (
-                  <motion.div
-                    layout
-                    className="w-full flex flex-col bg-[#e3eefc] items-center"
-                  >
-                    <div className="max-w-3xl py-10 w-full">
-                      {answer && !generatingAnswer && (
-                        <GenerativeAnswerWrapperHH
-                          results={verticalResults}
-                          answer={answer}
-                        />
-                      )}
-                      {generatingAnswer && (
-                        <>
-                          <div className="flex items-center gap-2 text-lg text-[#0a3366]">
-                            <Bars
-                              className="h-5 w-5"
-                              fill="#0a3366"
-                              speed={0.5}
-                            />
-                            <p>Generating Answer...</p>
-                          </div>
-                        </>
-                      )}
+                {currentQuery && answer && !generatingAnswer && (
+                  <div className="max-w-3xl w-full flex flex-col border-gray-300 border p-4 rounded-lg shadow-md mb-4">
+                    <GenerativeAnswerWrapperHH
+                      results={verticalResults}
+                      answer={answer}
+                    />
+                  </div>
+                )}
+                {currentQuery && generatingAnswer && (
+                  <div className="max-w-3xl w-full flex flex-col border-gray-300 border p-4 rounded-lg shadow-md mb-4">
+                    <div className="flex w-full items-center gap-4 h-12">
+                      <ChatBubbleOvalLeftEllipsisIcon className="h-7 w-7 animate-pulse text-slate-900/20" />
+                      <div className="space-y-2 flex flex-col w-full">
+                        <Skeleton className="h-4" />
+                        <Skeleton className="h-4 w-3/4" />
+                      </div>
                     </div>
-                  </motion.div>
+                  </div>
                 )}
                 <div className="w-full flex flex-col max-w-3xl">
                   {/* {currentQuery && answer && !generatingAnswer && <Divider />} */}
                   <section className="flex flex-col">
                     {verticalResults &&
-                      verticalResults.length > 0 &&
-                      currentQuery && (
-                        <>
-                          <div className="mt-8 mb-0 py-0 flex gap-2 items-center">
-                            <DocumentDuplicateIcon className="w-6 h-6" />
-                            <h3 className="text-lg">Search Results</h3>
-                          </div>
-                          <SearchResultsHH results={verticalResults} />
-                        </>
-                      )}
+                    verticalResults.length > 0 &&
+                    currentQuery &&
+                    !isLoading ? (
+                      <SearchResultsHH results={verticalResults} />
+                    ) : isLoading ? (
+                      <div className="flex flex-col gap-4">
+                        {[...Array(10)].map((i, item) => {
+                          return (
+                            <div
+                              className="border border-gray-300 px-8 py-4 rounded-lg text-stone-900 flex scroll-mt-6"
+                              key={i}
+                            >
+                              <div className="space-y-4 flex flex-col w-full">
+                                <Skeleton className="h-4" />
+                                <Skeleton className="h-4 w-1/4" />
+                                <Skeleton className="h-20" />
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </section>
                 </div>
               </div>
-            </motion.div>
+            </div>
             <ScrollToTopButton />
           </>
         )}

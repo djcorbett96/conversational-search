@@ -8,18 +8,18 @@ const SearchResultHitchhikers = ({ result }) => {
 
   return (
     <div
-      className="border-b border-gray-300 py-8 text-stone-900 flex scroll-mt-6"
+      className="border border-gray-300 px-8 py-4 rounded-lg text-stone-900 flex scroll-mt-6"
       id={result.index}
     >
       {selectedCitation === `${result.index}` && (
-        <motion.div
-          initial={{ padding: '0px' }}
-          animate={{ padding: '2px' }}
-          exit={{ padding: '0px' }}
+        <div
+          // initial={{ padding: '0px' }}
+          // animate={{ padding: '2px' }}
+          // exit={{ padding: '0px' }}
           className={cn('h-full bg-[#0a3366] mr-4 rounded-sm p-[2px]')}
-        ></motion.div>
+        ></div>
       )}
-      <motion.div layout>
+      <div>
         <p className="mb-2 font-light italic">
           <span className="font-semibold not-italic">Segment: </span>
           {result.segment.text}
@@ -37,7 +37,7 @@ const SearchResultHitchhikers = ({ result }) => {
           <p className="font-semibold">Relevance Score:</p>
           <p className="font-light">{result.segment.score}</p>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
