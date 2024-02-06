@@ -1,13 +1,12 @@
 import React from 'react';
 import { sanitizeCitations } from '../../utils/citations/sanitizeCitations';
 import GenerativeAnswer from '../GenerativeAnswer';
-import { extractCitations } from '../../utils/citations/extractCitations';
+import SourcesHH from './SourcesHH';
 import { GrResources } from 'react-icons/gr';
 import { Result } from '@yext/search-headless-react';
 import { FaWandMagicSparkles } from 'react-icons/fa6';
 import { usePageContext } from '../../utils/usePageContext';
 import FollowUpButton from '../FollowUpButton';
-import SourcesHH from './SourcesHH';
 
 type Props = {
   answer: string;
@@ -19,28 +18,25 @@ export default function GenerativeAnswerWrapperHP({ answer, results }: Props) {
   // const searchResults = testResults;
   const searchResults = results;
   const rawSummary = answer;
-  const unorderedSummary = sanitizeCitations(rawSummary);
-  const citations = extractCitations(rawSummary);
-  const filteredCitations = citations.filter((citation) => citation.references);
-  const newIndex = filteredCitations.map((citation) =>
-    parseInt(citation.references[0])
-  );
-  const uniqueIndex = new Set(newIndex);
-  const finalIndex = [];
-  uniqueIndex.forEach((i) => finalIndex.push(i));
-  const sourcesArray = finalIndex.map((i) => {
-    const source = searchResults.find((result) => result.index === i);
-    return source;
-  });
+  const answerCitationSplit = sanitizeCitations(rawSummary);
+  const cleanAnswer = answerCitationSplit && answerCitationSplit[0];
+  const citationsArray =
+    answerCitationSplit && JSON.parse(answerCitationSplit[1]);
+  const sourcesArray =
+    citationsArray &&
+    citationsArray.map((i) => {
+      const source = searchResults.find((result) => result.id === i);
+      return source;
+    });
 
-  return (
+  return answerCitationSplit ? (
     <div className="w-full flex flex-col gap-6 max-w-3xl text-[#0a3366]">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
           <FaWandMagicSparkles className="h-5 w-5" />
           <h3 className="text-lg">Generative Answer</h3>
         </div>
-        <GenerativeAnswer answer={unorderedSummary} />
+        <GenerativeAnswer answer={cleanAnswer} />
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
@@ -50,6 +46,11 @@ export default function GenerativeAnswerWrapperHP({ answer, results }: Props) {
         <SourcesHH sources={sourcesArray} />
       </div>
       <FollowUpButton />
+    </div>
+  ) : (
+    <div className="flex items-center gap-2">
+      <FaWandMagicSparkles className="h-5 w-5 text-[#0a3366]" />
+      <h3 className="text-lg text-[#0a3366]">Unable to generate answer</h3>
     </div>
   );
 }

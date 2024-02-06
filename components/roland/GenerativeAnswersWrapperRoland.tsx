@@ -1,38 +1,28 @@
 import React from 'react';
 import { sanitizeCitations } from '../../utils/citations/sanitizeCitations';
 import GenerativeAnswer from '../GenerativeAnswer';
-import { extractCitations } from '../../utils/citations/extractCitations';
+import SourcesRoland from './SourcesRoland';
 import { GrResources } from 'react-icons/gr';
 import { Result } from '@yext/search-headless-react';
 import { FaWandMagicSparkles } from 'react-icons/fa6';
 import { usePageContext } from '../../utils/usePageContext';
 import FollowUpButton from '../FollowUpButton';
-import SourcesRoland from './SourcesRoland';
 
 type Props = {
   answer: string;
   results: Result[];
 };
 
-export default function GenerativeAnswerWrapperRoland({
-  answer,
-  results,
-}: Props) {
+export default function GenerativeAnswerWrapperHP({ answer, results }: Props) {
   const { generatingAnswer } = usePageContext();
   // const searchResults = testResults;
   const searchResults = results;
   const rawSummary = answer;
-  const unorderedSummary = sanitizeCitations(rawSummary);
-  const citations = extractCitations(rawSummary);
-  const filteredCitations = citations.filter((citation) => citation.references);
-  const newIndex = filteredCitations.map((citation) =>
-    parseInt(citation.references[0])
-  );
-  const uniqueIndex = new Set(newIndex);
-  const finalIndex = [];
-  uniqueIndex.forEach((i) => finalIndex.push(i));
-  const sourcesArray = finalIndex.map((i) => {
-    const source = searchResults.find((result) => result.index === i);
+  const answerCitationSplit = sanitizeCitations(rawSummary);
+  const cleanAnswer = answerCitationSplit[0];
+  const citationsArray = JSON.parse(answerCitationSplit[1]);
+  const sourcesArray = citationsArray.map((i) => {
+    const source = searchResults.find((result) => result.id === i);
     return source;
   });
 
@@ -43,7 +33,7 @@ export default function GenerativeAnswerWrapperRoland({
           <FaWandMagicSparkles className="h-5 w-5" />
           <h3 className="text-lg">Generative Answer</h3>
         </div>
-        <GenerativeAnswer answer={unorderedSummary} />
+        <GenerativeAnswer answer={cleanAnswer} />
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">

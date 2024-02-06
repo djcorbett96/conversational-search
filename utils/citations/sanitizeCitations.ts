@@ -1,37 +1,24 @@
 export const sanitizeCitations = (summary?: string) => {
   if (!summary) return summary;
+  if (summary === 'NO_ANSWER_FOUND') return;
 
   // Match citations.
-  const regex = /\[(\d+(,*\s*\d*)*)\]/g;
+  // const regex = /\[(.*?)\]$/;
+  const regex = /\[([^\[\]]*)\]$/;
+  const match = regex.exec(summary);
+
+  if (!match) {
+    return;
+  }
 
   const parts: string[] = [];
-
-  let match;
-  let lastIndex = 0;
-
-  // Parse all cited content.
-  while ((match = regex.exec(summary)) !== null) {
-    const index = match.index;
-    const reference = match[1];
-    const text = summary.slice(lastIndex, index);
-    // Handle citations that are in the form of [1, 2, 3] or [1,2,3]
-    // so normalize to the latter.
-    parts.push(text);
-    parts.push(
-      reference
-        .replace(/\s/g, '')
-        .split(',')
-        .map((citation) => `[${citation}]`)
-        .join('')
-    );
-    lastIndex = index + match[0].length;
-  }
-
-  // Add the remaining content after the last citation.
-  const text = summary.slice(lastIndex);
-  if (text.length > 0) {
-    parts.push(text);
-  }
-
-  return parts.join('');
+  const extractedArray = match[0];
+  // console.log(extractedArray);
+  const index = match.index;
+  const text = summary.slice(0, index);
+  // console.log(text);
+  parts.push(text);
+  parts.push(extractedArray);
+  console.log(parts);
+  return parts;
 };
