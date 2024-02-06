@@ -97,10 +97,12 @@ function Inner(): JSX.Element {
     ) {
       const generateAnswer = async () => {
         setGeneratingAnswer(true);
-        const generatedAnswer = await fetchAnswer(
-          currentQuery,
-          verticalResults
+        console.log(verticalResults);
+        const cleanedResults = verticalResults.map(
+          ({ highlightedFields, ...cleanResult }) => cleanResult
         );
+        console.log(cleanedResults);
+        const generatedAnswer = await fetchAnswer(currentQuery, cleanedResults);
         setAnswer(generatedAnswer);
         chatActions.addMessage({
           source: 'BOT',

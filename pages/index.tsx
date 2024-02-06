@@ -18,12 +18,6 @@ const Index = () => {
           Hitchhikers
         </div>
       </Link>
-      <Link href="/lux">
-        <div className="border rounded-lg py-3 w-96 text-center text-xl shadow text-[#0a3366] hover:bg-[#0a3366] hover:text-white transition ease-linear cursor-pointer">
-          {' '}
-          Lux
-        </div>
-      </Link>
     </div>
   );
 };
