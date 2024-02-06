@@ -30,7 +30,7 @@ export const fetchAnswer = async (query, results) => {
   };
 
   const chatResponse = await fetch(
-    'https://cdn.yextapis.com/v2/accounts/me/chat/generic-question-answerer/message?v=20231211&api_key=c4958314f662a3ccfaab5a5ad68bd084&',
+    'https://cdn.yextapis.com/v2/accounts/me/chat/ga-proto/message?v=20231211&api_key=c4958314f662a3ccfaab5a5ad68bd084',
     requestOptions
   )
     .then((response) => {
