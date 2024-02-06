@@ -29,7 +29,7 @@ export default function GenerativeAnswerWrapperHP({ answer, results }: Props) {
       return source;
     });
 
-  return (
+  return answerCitationSplit ? (
     <div className="w-full flex flex-col gap-6 max-w-3xl text-[#0a3366]">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
@@ -46,6 +46,11 @@ export default function GenerativeAnswerWrapperHP({ answer, results }: Props) {
         <SourcesRoland sources={sourcesArray} />
       </div>
       <FollowUpButton />
+    </div>
+  ) : (
+    <div className="flex items-center gap-2">
+      <FaWandMagicSparkles className="h-5 w-5 text-[#0a3366]" />
+      <h3 className="text-lg text-[#0a3366]">Unable to generate answer</h3>
     </div>
   );
 }
