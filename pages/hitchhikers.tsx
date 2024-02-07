@@ -1,4 +1,9 @@
-import { SearchBar, SpellCheck, onSearchFunc } from '@yext/search-ui-react';
+import {
+  ResultsCount,
+  SearchBar,
+  SpellCheck,
+  onSearchFunc,
+} from '@yext/search-ui-react';
 import React, { useState } from 'react';
 import {
   HeadlessConfig,
@@ -129,6 +134,7 @@ function Inner(): JSX.Element {
         setGeneratingAnswer,
         chatMode,
         setChatMode,
+        isLoading,
       }}
     >
       <AnimatePresence>
@@ -143,7 +149,7 @@ function Inner(): JSX.Element {
                   />
                   <SpellCheck />
                 </div>
-                {currentQuery && answer && !generatingAnswer && (
+                {currentQuery && (
                   <div className="max-w-3xl w-full flex flex-col border-gray-300 border p-4 rounded-lg shadow-md mb-4">
                     <GenerativeAnswerWrapperHH
                       results={verticalResults}
@@ -151,7 +157,7 @@ function Inner(): JSX.Element {
                     />
                   </div>
                 )}
-                {currentQuery && generatingAnswer && (
+                {/* {currentQuery && generatingAnswer && (
                   <div className="max-w-3xl w-full flex flex-col border-gray-300 border p-4 rounded-lg shadow-md mb-4">
                     <div className="flex w-full items-center gap-4 h-12">
                       <ChatBubbleOvalLeftEllipsisIcon className="h-7 w-7 animate-pulse text-slate-900/20" />
@@ -161,15 +167,17 @@ function Inner(): JSX.Element {
                       </div>
                     </div>
                   </div>
-                )}
+                )} */}
                 <div className="w-full flex flex-col max-w-3xl">
-                  {/* {currentQuery && answer && !generatingAnswer && <Divider />} */}
                   <section className="flex flex-col">
                     {verticalResults &&
                     verticalResults.length > 0 &&
                     currentQuery &&
                     !isLoading ? (
-                      <SearchResultsHH results={verticalResults} />
+                      <>
+                        <ResultsCount />
+                        <SearchResultsHH results={verticalResults} />
+                      </>
                     ) : isLoading ? (
                       <div className="flex flex-col gap-4">
                         {[...Array(10)].map((i, item) => {
