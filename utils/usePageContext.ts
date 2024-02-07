@@ -7,7 +7,7 @@ type PageContextType = {
   setGeneratingAnswer: (data: boolean) => void;
   chatMode: boolean;
   setChatMode: (data: boolean) => void;
-  isLoading: boolean;
+  isLoading?: boolean;
 };
 
 // Setup LocatorProvider to pass the [selected, hovered, focused]Ids between Marker interactions and LocatorCard interactions
