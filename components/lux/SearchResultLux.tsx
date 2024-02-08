@@ -21,7 +21,7 @@ const SearchResultLux = ({ result }) => {
       <motion.div layout>
         <p className="mb-2 font-light italic">
           <span className="font-semibold not-italic">Content: </span>
-          {result.rawData.c_contents[0]}
+          {result.rawData.c_contents[0].split(/\s+/).slice(0, 70).join(" ") + "..."}
         </p>
         <div className="flex gap-1">
           <p className="font-semibold">Source:</p>
