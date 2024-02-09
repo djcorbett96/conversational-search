@@ -3,7 +3,7 @@ import SearchResultHP from './SearchResultReports';
 
 const SearchResultsReports = ({ results }) => {
   return (
-    <section className="flex flex-col">
+    <section className="flex flex-col gap-4 mt-6">
       {results.map((result) => {
         return (
           <SearchResultHP

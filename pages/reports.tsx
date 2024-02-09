@@ -178,10 +178,10 @@ function Inner(): JSX.Element {
                       verticalResults.length > 0 &&
                       currentQuery && (
                         <>
-                          <div className="mt-8 mb-0 py-0 flex gap-2 items-center">
+                          {/* <div className="mt-8 mb-0 py-0 flex gap-2 items-center">
                             <DocumentDuplicateIcon className="w-6 h-6" />
                             <h3 className="text-lg">Search Results</h3>
-                          </div>
+                          </div> */}
                           <SearchResultsReports results={verticalResults} />
                         </>
                       )}

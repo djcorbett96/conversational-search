@@ -8,7 +8,7 @@ const SearchResult = ({ result }) => {
 
   return (
     <div
-      className="border-b border-gray-300 py-8 text-stone-900 flex scroll-mt-6"
+      className="border border-gray-300 p-8 rounded-lg text-stone-900 flex scroll-mt-6"
       id={result.index}
     >
       {selectedCitation === `${result.index}` && (
