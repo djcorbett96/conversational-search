@@ -198,7 +198,7 @@ function Inner(): JSX.Element {
             animate={{ y: 0 }}
             exit={{ y: '100vh' }}
             transition={{ duration: 0.3 }}
-            className="flex w-3/4 h-full absolute top-0 right-0 object-cover bg-white"
+            className="flex w-full h-full absolute top-0 right-0 object-cover bg-white"
           >
             <div className="w-full h-full shrink-0 relative">
               <button
