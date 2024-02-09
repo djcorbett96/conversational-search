@@ -15,7 +15,9 @@ export const usePageSetupEffect = (verticalKey?: string) => {
     const searchParams = new URLSearchParams(window.location.search);
     const query = searchParams.get('query');
     searchActions.setQuery(query || '');
-    searchActions.executeVerticalQuery();
+    if (query) {
+      searchActions.executeVerticalQuery();
+    }
     if (query && totalMessages === 0) {
       chatActions.addMessage({
         source: 'USER',
