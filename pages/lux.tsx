@@ -28,8 +28,8 @@ import GenerativeAnswerWrapperLux from '../components/lux/GenerativeAnswerWrappe
 import SearchResultsLux from '../components/lux/SearchResultsLux';
 
 const config: HeadlessConfig = {
-  apiKey: 'd61f3479df0bc55349bdd73431577b60',
-  experienceKey: 'lux-research-search-experience',
+  apiKey: 'c08ff26d70519dd5e377fdcb5f80acfb',
+  experienceKey: 'lux-demo',
   locale: 'en',
   verticalKey: 'insights',
 };
