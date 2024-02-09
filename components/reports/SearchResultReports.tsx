@@ -3,23 +3,23 @@ import { usePageContext } from '../../utils/usePageContext';
 import { cn } from '../../utils/cn';
 import { motion } from 'framer-motion';
 
-const SearchResultHitchhikers = ({ result }) => {
+const SearchResult = ({ result }) => {
   const { selectedCitation } = usePageContext();
 
   return (
     <div
-      className="border border-gray-300 px-8 py-4 rounded-lg text-stone-900 flex scroll-mt-6"
+      className="border-b border-gray-300 py-8 text-stone-900 flex scroll-mt-6"
       id={result.index}
     >
       {selectedCitation === `${result.index}` && (
-        <div
-          // initial={{ padding: '0px' }}
-          // animate={{ padding: '2px' }}
-          // exit={{ padding: '0px' }}
+        <motion.div
+          initial={{ padding: '0px' }}
+          animate={{ padding: '2px' }}
+          exit={{ padding: '0px' }}
           className={cn('h-full bg-[#0a3366] mr-4 rounded-sm p-[2px]')}
-        ></div>
+        ></motion.div>
       )}
-      <div>
+      <motion.div layout>
         <p className="mb-2 font-light italic">
           <span className="font-semibold not-italic">Segment: </span>
           {result.segment.text}
@@ -28,7 +28,7 @@ const SearchResultHitchhikers = ({ result }) => {
           <p className="font-semibold">Source:</p>
           <a
             className="hover:cursor-pointer hover:underline w-fit text-blue-600"
-            href={result.rawData.landingPageUrl}
+            href={result.rawData.c_file.url}
           >
             <div>{result.rawData.name}</div>
           </a>
@@ -37,9 +37,9 @@ const SearchResultHitchhikers = ({ result }) => {
           <p className="font-semibold">Relevance Score:</p>
           <p className="font-light">{result.segment.score}</p>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
 
-export default SearchResultHitchhikers;
+export default SearchResult;

@@ -1,8 +1,7 @@
 import React from 'react';
 import { FaFilePdf } from 'react-icons/fa6';
-import { MdOutlineArticle } from 'react-icons/md';
 
-const SourcesHH = ({ sources }) => {
+const SourcesReports = ({ sources }) => {
   const uniqueSources = sources.reduce((accumulator, current) => {
     if (!accumulator.find((item) => item.id == current.id)) {
       accumulator.push(current);
@@ -13,12 +12,16 @@ const SourcesHH = ({ sources }) => {
     <section className="flex gap-2 flex-wrap">
       {uniqueSources.map((source, i) => {
         return (
-          <a key={i} href={source.rawData.landingPageUrl} target="_blank">
+          <a
+            key={i}
+            href={source.rawData?.c_file?.url || source.rawData?.landingPageUrl}
+            target="_blank"
+          >
             <div
               key={i}
-              className="border border-black items-center rounded-lg p-2 w-48 flex gap-2 hover:underline hover:cursor-pointer transition ease-linear h-full"
+              className="bg-white rounded-md p-2 w-48 flex gap-2 hover:bg-[#0a3366] hover:text-white hover:cursor-pointer text-[#0a3366] transition ease-linear h-full"
             >
-              <MdOutlineArticle className="w-4 min-w-[1.5rem] min-h-[1.5rem] h-4" />
+              <FaFilePdf className="w-8 h-8" />
               <p className="text-sm text-semibold line-clamp-2">
                 {source.rawData.name}
               </p>
@@ -30,4 +33,4 @@ const SourcesHH = ({ sources }) => {
   );
 };
 
-export default SourcesHH;
+export default SourcesReports;
