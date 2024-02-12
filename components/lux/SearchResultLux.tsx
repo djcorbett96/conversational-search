@@ -21,7 +21,8 @@ const SearchResultLux = ({ result }) => {
       <motion.div layout>
         <p className="mb-2 font-light italic">
           <span className="font-semibold not-italic">Content: </span>
-          {result.rawData.c_contents[0]}
+          {/* {result.rawData.c_contents[0].split(/\s+/).slice(0, 70).join(" ") + "..."} */}
+          {result.segment.text}
         </p>
         <div className="flex gap-1">
           <p className="font-semibold">Source:</p>
@@ -31,6 +32,10 @@ const SearchResultLux = ({ result }) => {
           >
             <div>{result.rawData.name}</div>
           </a>
+        </div>
+        <div className="flex gap-1">
+          <p className="font-semibold">Relevance Score:</p>
+          <p className="font-light">{result.segment.score}</p>
         </div>
       </motion.div>
     </div>
