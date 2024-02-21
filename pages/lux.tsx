@@ -35,8 +35,8 @@ const config: HeadlessConfig = {
 };
 
 const chatConfig: ChatConfig = {
-  apiKey: '77dc917115321087d5dc1ad7f7cea4ac',
-  botId: 'conversational-search',
+  apiKey: 'be97d1e89f5fa81b1f23018246c9b619',
+  botId: 'lux-demo-bot',
 };
 
 export default function Lux(): JSX.Element {
