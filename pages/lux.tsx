@@ -7,7 +7,6 @@ import {
   useSearchActions,
   useSearchState,
 } from '@yext/search-headless-react';
-import { fetchAnswer } from '../utils/fetchAnswer';
 import { PageContextProvider } from '../utils/usePageContext';
 import { testResults } from '../utils/testResults';
 import { testAnswer } from '../utils/testAnswer';
@@ -26,6 +25,7 @@ import {
 } from '@yext/chat-headless-react';
 import GenerativeAnswerWrapperLux from '../components/lux/GenerativeAnswerWrapperLux';
 import SearchResultsLux from '../components/lux/SearchResultsLux';
+import { fetchAnswerLux } from '../utils/fetchAnswerLux';
 
 const config: HeadlessConfig = {
   apiKey: 'c08ff26d70519dd5e377fdcb5f80acfb',
@@ -102,7 +102,10 @@ function Inner(): JSX.Element {
           ({ highlightedFields, ...cleanResult }) => cleanResult
         );
         console.log(cleanedResults);
-        const generatedAnswer = await fetchAnswer(currentQuery, cleanedResults);
+        const generatedAnswer = await fetchAnswerLux(
+          currentQuery,
+          cleanedResults
+        );
         setAnswer(generatedAnswer);
         chatActions.addMessage({
           source: 'BOT',
