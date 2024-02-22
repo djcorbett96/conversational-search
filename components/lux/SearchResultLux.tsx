@@ -3,6 +3,15 @@ import { usePageContext } from '../../utils/usePageContext';
 import { cn } from '../../utils/cn';
 import { motion } from 'framer-motion';
 
+const typeMap = {
+  ce_caseStudy: 'Case Study',
+  ce_insights: 'Insight',
+  ce_news: 'News',
+  ce_technologies: 'Technology',
+  ce_events: 'Event',
+  ce_companies: 'Company',
+};
+
 const SearchResultLux = ({ result }) => {
   const { selectedCitation } = usePageContext();
   return (
@@ -32,6 +41,10 @@ const SearchResultLux = ({ result }) => {
           >
             <div>{result.rawData.name}</div>
           </a>
+        </div>
+        <div className="flex gap-1">
+          <p className="font-semibold">Type:</p>
+          <div>{typeMap[result.rawData.type]}</div>
         </div>
         <div className="flex gap-1">
           <p className="font-semibold">Relevance Score:</p>
