@@ -21,13 +21,13 @@ export default function GenerativeAnswerWrapperCNO({ answer, results }: Props) {
   const rawSummary = answer;
   const answerCitationSplit = sanitizeCitations(rawSummary);
   let cleanAnswer = answer;
-  if (answerCitationSplit[0]) {
+  if (answerCitationSplit && answerCitationSplit[0]) {
     cleanAnswer = answerCitationSplit && answerCitationSplit[0];
   }
 
   let sourcesArray = [];
   let citationsArray = [];
-  if (answerCitationSplit[0]) {
+  if (answerCitationSplit && answerCitationSplit[0]) {
     citationsArray = answerCitationSplit && JSON.parse(answerCitationSplit[1]);
     sourcesArray =
       citationsArray &&
