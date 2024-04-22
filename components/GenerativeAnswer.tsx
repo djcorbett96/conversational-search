@@ -6,7 +6,7 @@ type Props = {
 };
 
 export default function GenerativeAnswer({ answer }: Props) {
-  return (
+  return answer ? (
     <div dir="auto" className="markdown-reverts">
       <Markdown
         options={{
@@ -16,5 +16,5 @@ export default function GenerativeAnswer({ answer }: Props) {
         {answer}
       </Markdown>
     </div>
-  );
+  ) : null;
 }

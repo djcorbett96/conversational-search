@@ -2,12 +2,16 @@ import React from 'react';
 import { FaFilePdf } from 'react-icons/fa6';
 
 const SourcesCNO = ({ sources }) => {
-  const uniqueSources = sources.reduce((accumulator, current) => {
-    if (!accumulator.find((item) => item.id == current.id)) {
-      accumulator.push(current);
-    }
-    return accumulator;
-  }, []);
+  let uniqueSources = [];
+  if (sources) {
+    uniqueSources = sources.reduce((accumulator, current) => {
+      if (!accumulator.find((item) => item.id == current.id)) {
+        accumulator.push(current);
+      }
+      return accumulator;
+    }, []);
+  }
+
   return (
     <section className="flex gap-2 flex-wrap">
       {uniqueSources.map((source, i) => {
