@@ -16,20 +16,28 @@ type Props = {
 export default function GenerativeAnswerWrapperCNO({ answer, results }: Props) {
   const { generatingAnswer } = usePageContext();
   // const searchResults = testResults;
+
   const searchResults = results;
   const rawSummary = answer;
   const answerCitationSplit = sanitizeCitations(rawSummary);
-  const cleanAnswer = answerCitationSplit && answerCitationSplit[0];
-  const citationsArray =
-    answerCitationSplit && JSON.parse(answerCitationSplit[1]);
-  const sourcesArray =
-    citationsArray &&
-    citationsArray.map((i) => {
-      const source = searchResults.find((result) => result.id === i);
-      return source;
-    });
+  let cleanAnswer = answer;
+  if (answerCitationSplit[0]) {
+    cleanAnswer = answerCitationSplit && answerCitationSplit[0];
+  }
 
-  return answerCitationSplit ? (
+  let sourcesArray = [];
+  let citationsArray = [];
+  if (answerCitationSplit[0]) {
+    citationsArray = answerCitationSplit && JSON.parse(answerCitationSplit[1]);
+    sourcesArray =
+      citationsArray &&
+      citationsArray.map((i) => {
+        const source = searchResults.find((result) => result.id === i);
+        return source;
+      });
+  }
+
+  return rawSummary != 'NO_ANSWER_FOUND' ? (
     <div className="w-full flex flex-col gap-6 max-w-3xl text-[#0a3366]">
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-2">
