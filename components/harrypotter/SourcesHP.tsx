@@ -3,7 +3,7 @@ import { FaFilePdf } from 'react-icons/fa6';
 
 const SourcesHP = ({ sources }) => {
   const uniqueSources = sources.reduce((accumulator, current) => {
-    if (!accumulator.find((item) => item.id == current.id)) {
+    if (!accumulator.find((item) => item?.id == current?.id)) {
       accumulator.push(current);
     }
     return accumulator;
@@ -14,7 +14,9 @@ const SourcesHP = ({ sources }) => {
         return (
           <a
             key={i}
-            href={source.rawData?.c_file?.url || source.rawData?.landingPageUrl}
+            href={
+              source?.rawData?.c_file?.url || source?.rawData?.landingPageUrl
+            }
             target="_blank"
           >
             <div
@@ -23,7 +25,7 @@ const SourcesHP = ({ sources }) => {
             >
               <FaFilePdf className="w-8 h-8" />
               <p className="text-sm text-semibold line-clamp-2">
-                {source.rawData.name}
+                {source?.rawData.name}
               </p>
             </div>
           </a>

@@ -17,15 +17,17 @@ export default function GenerativeAnswerWrapperHP({ answer, results }: Props) {
   const { generatingAnswer } = usePageContext();
   // const searchResults = testResults;
   const searchResults = results;
+  console.log(searchResults);
   const rawSummary = answer;
   const answerCitationSplit = sanitizeCitations(rawSummary);
   const cleanAnswer = answerCitationSplit && answerCitationSplit[0];
   const citationsArray =
     answerCitationSplit && JSON.parse(answerCitationSplit[1]);
+  console.log('citations array:', citationsArray);
   const sourcesArray =
     citationsArray &&
     citationsArray.map((i) => {
-      const source = searchResults.find((result) => result.id === i);
+      const source = searchResults.find((result) => result.rawData.uid === i);
       return source;
     });
 

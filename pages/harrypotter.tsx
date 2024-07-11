@@ -96,6 +96,7 @@ function Inner(): JSX.Element {
     ) {
       const generateAnswer = async () => {
         setGeneratingAnswer(true);
+        console.log('results passed to answer:', verticalResults);
         const generatedAnswer = await fetchAnswer(
           currentQuery,
           verticalResults
